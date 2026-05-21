@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Duc — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mac-beige: #C8C0B0;
+    --mac-beige-dark: #AEA89E;
+    --mac-beige-light: #E8E0D0;
+    --mac-cream: #F5F0E8;
+    --mac-shadow: #666055;
+    --mac-highlight: #FFFFFF;
+    --rainbow-red: #FF3333;
+    --rainbow-orange: #FF9500;
+    --rainbow-yellow: #FFEE00;
+    --rainbow-green: #00CC00;
+    --rainbow-blue: #0066FF;
+    --rainbow-purple: #9933CC;
+    --sys-black: #1A1A1A;
+    --sys-gray: #888888;
+    --sys-border: #555555;
+    --chicago: 'VT323', monospace;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--mac-beige);
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 1px,
+        rgba(0,0,0,0.03) 1px,
+        rgba(0,0,0,0.03) 2px
+      );
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── MENU BAR ── */
+  .menubar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 22px;
+    background: var(--mac-beige-light);
+    border-bottom: 1px solid var(--mac-shadow);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    font-family: var(--chicago);
+    font-size: 16px;
+    box-shadow: 0 1px 0 var(--mac-highlight) inset;
+  }
+  .menubar-apple {
+    padding: 0 14px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    cursor: default;
+    border-right: 1px solid var(--mac-shadow);
+  }
+  .apple-stripe { display: inline-block; width: 12px; height: 3px; }
+  .apple-stripe:nth-child(1) { background: var(--rainbow-red); }
+  .apple-stripe:nth-child(2) { background: var(--rainbow-orange); }
+  .apple-stripe:nth-child(3) { background: var(--rainbow-yellow); }
+  .apple-stripe:nth-child(4) { background: var(--rainbow-green); }
+  .apple-stripe:nth-child(5) { background: var(--rainbow-blue); }
+  .apple-stripe:nth-child(6) { background: var(--rainbow-purple); }
+  .menubar-item {
+    padding: 0 12px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    cursor: default;
+    color: var(--sys-black);
+  }
+  .menubar-item:hover { background: var(--sys-black); color: white; }
+  .menubar-right {
+    margin-left: auto;
+    padding: 0 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--sys-gray);
+  }
+
+  /* ── DESKTOP AREA ── */
+  .desktop {
+    margin-top: 22px;
+    padding: 24px;
+    min-height: calc(100vh - 22px);
+  }
+
+  /* ── WINDOW CHROME ── */
+  .window {
+    background: var(--mac-cream);
+    border: 1px solid var(--sys-border);
+    box-shadow:
+      1px 1px 0 var(--mac-highlight) inset,
+      -1px -1px 0 var(--mac-shadow) inset,
+      3px 3px 0 var(--mac-shadow);
+    margin-bottom: 24px;
+  }
+  .window-title {
+    height: 20px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--mac-beige-dark) 0px,
+      var(--mac-beige-dark) 1px,
+      var(--mac-beige-light) 1px,
+      var(--mac-beige-light) 3px
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--sys-border);
+    position: relative;
+  }
+  .window-title h2 {
+    font-family: var(--chicago);
+    font-size: 16px;
+    font-weight: normal;
+    background: var(--mac-beige-light);
+    padding: 0 10px;
+    letter-spacing: 0.5px;
+  }
+  .window-controls {
+    position: absolute;
+    left: 6px;
+    display: flex;
+    gap: 4px;
+  }
+  .wc { width: 13px; height: 13px; border: 1px solid var(--sys-border); background: var(--mac-beige); }
+  .window-body { padding: 16px; }
+
+  /* ── HERO WINDOW ── */
+  .hero-window { max-width: 780px; margin: 0 auto 24px; }
+  .hero-content {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .avatar-area { flex-shrink: 0; }
+  .avatar-frame {
+    width: 160px;
+    height: 160px;
+    border: 2px solid var(--sys-border);
+    background: var(--mac-beige);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 0 var(--mac-shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-pixel {
+    font-size: 90px;
+    line-height: 1;
+    user-select: none;
+  }
+  .rainbow-bar {
+    display: flex;
+    height: 5px;
+    width: 100%;
+  }
+  .rb { flex: 1; }
+  .rb-1 { background: var(--rainbow-red); }
+  .rb-2 { background: var(--rainbow-orange); }
+  .rb-3 { background: var(--rainbow-yellow); }
+  .rb-4 { background: var(--rainbow-green); }
+  .rb-5 { background: var(--rainbow-blue); }
+  .rb-6 { background: var(--rainbow-purple); }
+
+  .hero-text { flex: 1; min-width: 200px; }
+  .hero-name {
+    font-family: var(--chicago);
+    font-size: 38px;
+    color: var(--sys-black);
+    line-height: 1;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+  }
+  .hero-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--sys-gray);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .hero-bio {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--sys-black);
+    max-width: 420px;
+  }
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 16px;
+    background: var(--sys-black);
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+  /* ── SKILL TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 2px 8px;
+    border: 1px solid var(--sys-border);
+    background: var(--mac-beige-light);
+    color: var(--sys-black);
+    box-shadow: 1px 1px 0 var(--mac-shadow);
+  }
+  .tag.red { border-color: var(--rainbow-red); color: var(--rainbow-red); background: #FFF0F0; }
+  .tag.orange { border-color: var(--rainbow-orange); color: #CC7700; background: #FFF8E0; }
+  .tag.green { border-color: var(--rainbow-green); color: #007700; background: #F0FFF0; }
+  .tag.blue { border-color: var(--rainbow-blue); color: var(--rainbow-blue); background: #F0F0FF; }
+  .tag.purple { border-color: var(--rainbow-purple); color: var(--rainbow-purple); background: #F5F0FF; }
+
+  /* ── TWO-COL LAYOUT ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 780px; margin: 0 auto 24px; }
+  .two-col.single { grid-template-columns: 1fr; }
+  @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── PROJECT CARDS ── */
+  .projects-window { max-width: 780px; margin: 0 auto 24px; }
+  .project-list { display: flex; flex-direction: column; gap: 12px; }
+  .project-card {
+    border: 1px solid var(--sys-border);
+    background: var(--mac-beige-light);
+    padding: 12px;
+    box-shadow: 2px 2px 0 var(--mac-shadow);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--sys-border);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 1px 1px 0 var(--mac-shadow);
+  }
+  .project-name {
+    font-family: var(--chicago);
+    font-size: 18px;
+    margin-bottom: 3px;
+  }
+  .project-desc {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--sys-gray);
+    line-height: 1.5;
+  }
+  .project-tech {
+    font-family: var(--mono);
+    font-size: 10px;
+    margin-top: 6px;
+    color: var(--rainbow-blue);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    border-bottom: 1px dashed var(--mac-beige-dark);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+  .exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .exp-role {
+    font-family: var(--chicago);
+    font-size: 17px;
+    margin-bottom: 2px;
+  }
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--rainbow-blue);
+    margin-bottom: 4px;
+  }
+  .exp-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--sys-gray);
+    margin-bottom: 6px;
+  }
+  .exp-desc {
+    font-size: 13px;
+    color: var(--sys-black);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  .contact-window { max-width: 780px; margin: 0 auto 24px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr; } }
+  .contact-btn {
+    font-family: var(--chicago);
+    font-size: 16px;
+    padding: 10px 16px;
+    border: 1px solid var(--sys-border);
+    background: var(--mac-beige-light);
+    color: var(--sys-black);
+    cursor: pointer;
+    box-shadow: 2px 2px 0 var(--mac-shadow), 1px 1px 0 var(--mac-highlight) inset;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: none;
+  }
+  .contact-btn:active, .contact-btn:hover {
+    background: var(--mac-beige-dark);
+    box-shadow: 1px 1px 0 var(--mac-shadow), 0 0 0 var(--mac-highlight) inset;
+    transform: translate(1px, 1px);
+  }
+  .contact-icon { font-size: 20px; }
+
+  /* ── ABOUT FACTS ── */
+  .fact-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--mac-beige-dark);
+    font-size: 13px;
+  }
+  .fact-row:last-child { border-bottom: none; }
+  .fact-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--sys-gray);
+    min-width: 90px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+  .fact-value { color: var(--sys-black); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer-bar {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--sys-gray);
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .window { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  .window.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- MENU BAR -->
+<div class="menubar">
+  <div class="menubar-apple">
+    <span class="apple-stripe"></span>
+    <span class="apple-stripe"></span>
+    <span class="apple-stripe"></span>
+    <span class="apple-stripe"></span>
+    <span class="apple-stripe"></span>
+    <span class="apple-stripe"></span>
+  </div>
+  <div class="menubar-item"><strong>Duc's Portfolio</strong></div>
+  <div class="menubar-item">File</div>
+  <div class="menubar-item">View</div>
+  <div class="menubar-item">Special</div>
+  <div class="menubar-right" id="clock">--:-- --</div>
+</div>
+
+<!-- DESKTOP -->
+<div class="desktop">
+
+  <!-- HERO WINDOW -->
+  <div class="window hero-window">
+    <div class="window-title">
+      <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+      <h2>👤 About Me</h2>
+    </div>
+    <div class="rainbow-bar">
+      <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+      <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+    </div>
+    <div class="window-body">
+      <div class="hero-content">
+        <div class="avatar-area">
+          <div class="avatar-frame">
+            <div class="avatar-pixel">🧑‍💻</div>
+          </div>
+        </div>
+        <div class="hero-text">
+          <div class="hero-name">Duc</div>
+          <div class="hero-title">Software Engineer · Pennsylvania, USA</div>
+          <div class="hero-bio">
+            CS graduate building things at the intersection of software and hardware. Passionate about embedded systems, AI, and the semiconductor industry. Currently exploring a path toward electrical engineering and Japan. <span class="cursor"></span>
+          </div>
+          <div class="tags">
+            <span class="tag blue">Full-Stack Dev</span>
+            <span class="tag green">Embedded Systems</span>
+            <span class="tag orange">AI / ML</span>
+            <span class="tag red">Semiconductor</span>
+            <span class="tag purple">IoT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK FACTS full width -->
+  <div class="two-col single">
+    <!-- ABOUT / QUICK FACTS -->
+    <div class="window">
+      <div class="window-title">
+        <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+        <h2>📋 Quick Facts</h2>
+      </div>
+      <div class="rainbow-bar">
+        <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+        <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+      </div>
+      <div class="window-body">
+        <div class="fact-row">
+          <span class="fact-label">DEGREE</span>
+          <span class="fact-value">B.S. Computer Science</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">LOCATION</span>
+          <span class="fact-value">Pennsylvania, USA</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">INTERESTS</span>
+          <span class="fact-value">Japan 🇯🇵 · Motorcycles 🏍️ · Semiconductors · AI</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">HARDWARE</span>
+          <span class="fact-value">RTX 3090 · 98GB RAM · Local AI Setup</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">TARGET</span>
+          <span class="fact-value">EE / Semiconductor Industry · Japan Engineer Visa</span>
+        </div>
+        <div class="fact-row">
+          <span class="fact-label">STATUS</span>
+          <span class="fact-value" style="color: var(--rainbow-green); font-family: var(--mono); font-size:12px;">● Open to opportunities</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="window projects-window">
+    <div class="window-title">
+      <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+      <h2>💾 Projects</h2>
+    </div>
+    <div class="rainbow-bar">
+      <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+      <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+    </div>
+    <div class="window-body">
+      <div class="project-list">
+        <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <div>
+            <div class="project-name">OpenClaw Office Dashboard</div>
+            <div class="project-desc">Pixel art office simulation UI for a local AI agent system. Real-time agent pathfinding, physics, cron management, and WebSocket integration — all in a single cozy HTML file.</div>
+            <div class="project-tech">HTML · CSS · JavaScript · Docker · WebSocket · Local LLM</div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">💻</div>
+          <div>
+            <div class="project-name">Local AI Homelab</div>
+            <div class="project-desc">Self-hosted AI infrastructure running on RTX 3090 + 98GB RAM. Multi-agent orchestration with containerized services, API routing, and cron-based automation.</div>
+            <div class="project-tech">Python · Docker · CUDA · REST API · Windows 11</div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🔬</div>
+          <div>
+            <div class="project-name">Semiconductor Career Research</div>
+            <div class="project-desc">In-depth analysis of AI-displacement-resistant roles across Japan, Germany, Canada, and Australia. Mapped dual-market semiconductor opportunities at TSMC, TI, Renesas, and Rapidus.</div>
+            <div class="project-tech">Research · Career Planning · Japan Engineer Visa · EE/CS overlap</div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-icon">🏍️</div>
+          <div>
+            <div class="project-name">More projects coming soon...</div>
+            <div class="project-desc">Exploring embedded systems, IoT, and hardware-software integration projects as part of an EE/semiconductor transition path.</div>
+            <div class="project-tech">C · RTOS · FPGA · Embedded Linux</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="two-col">
+    <div class="window">
+      <div class="window-title">
+        <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+        <h2>🗂 Experience</h2>
+      </div>
+      <div class="rainbow-bar">
+        <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+        <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+      </div>
+      <div class="window-body">
+        <div class="exp-item">
+          <div class="exp-role">Software / Tech Role</div>
+          <div class="exp-company">Tech Industry · Pennsylvania</div>
+          <div class="exp-date">Current</div>
+          <div class="exp-desc">Working on software engineering and tech projects while building expertise in AI systems and preparing for a semiconductor/EE industry transition.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">CS Graduate</div>
+          <div class="exp-company">Bachelor of Science — Computer Science</div>
+          <div class="exp-date">Completed</div>
+          <div class="exp-desc">Core foundation in algorithms, systems programming, and software engineering. Qualifies for Japan's Engineer Visa pathway.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">AI Homelab Architect</div>
+          <div class="exp-company">Self-Directed</div>
+          <div class="exp-date">Ongoing</div>
+          <div class="exp-desc">Designed and built a local multi-agent AI system from scratch, combining hardware optimization, Docker infrastructure, and custom UIs.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDUCATION + INTERESTS -->
+    <div class="window">
+      <div class="window-title">
+        <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+        <h2>🎓 Education & Goals</h2>
+      </div>
+      <div class="rainbow-bar">
+        <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+        <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+      </div>
+      <div class="window-body">
+        <div class="exp-item">
+          <div class="exp-role">M.S. Electrical Engineering</div>
+          <div class="exp-company">Target: WGU / UT Arlington / Lamar</div>
+          <div class="exp-date">Planned — Online / In-state Texas</div>
+          <div class="exp-desc">Pursuing EE master's to bridge CS background with semiconductor and embedded hardware industry requirements.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">JLPT N2 Japanese</div>
+          <div class="exp-company">Self-study</div>
+          <div class="exp-date">In Progress</div>
+          <div class="exp-desc">Working toward N2 proficiency as a key milestone for Japan's Engineer Visa and technical workplace integration.</div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-role">Target Companies</div>
+          <div class="exp-company">TSMC Kumamoto · Rapidus · Renesas · Texas Instruments · NXP</div>
+          <div class="exp-date">Japan & USA Semiconductor</div>
+          <div class="exp-desc">Targeting semiconductor roles in embedded/IoT, process engineering, and AI hardware — resilient to AI displacement.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="window contact-window">
+    <div class="window-title">
+      <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
+      <h2>📡 Get In Touch</h2>
+    </div>
+    <div class="rainbow-bar">
+      <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
+      <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
+    </div>
+    <div class="window-body">
+      <div class="contact-grid">
+        <a class="contact-btn" href="mailto:your@email.com">
+          <span class="contact-icon">✉️</span> Email Me
+        </a>
+        <a class="contact-btn" href="https://github.com/" target="_blank">
+          <span class="contact-icon">🐙</span> GitHub
+        </a>
+        <a class="contact-btn" href="https://linkedin.com/" target="_blank">
+          <span class="contact-icon">💼</span> LinkedIn
+        </a>
+        <a class="contact-btn" href="#" onclick="alert('Resume download coming soon!')">
+          <span class="contact-icon">📄</span> Resume.pdf
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-bar">
+    <span>© 2026 Duc — Made with ♥ and nostalgia</span>
+    <span>System 7.5.3 · 640×480 · 256 Colors</span>
+  </div>
+
+</div>
+
+<script>
+  // Clock
+  function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.window').forEach(w => observer.observe(w));
+</script>
+</body>
+</html>
