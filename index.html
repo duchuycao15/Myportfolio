@@ -352,6 +352,145 @@
   }
   .fact-value { color: var(--sys-black); line-height: 1.5; }
 
+  /* ── QUICK FACTS: CLASSIC CRT TERMINAL ── */
+  .terminal-window {
+    background: #b9b1a1;
+    border: 3px solid #4f493f;
+    box-shadow:
+      2px 2px 0 #eee6d3 inset,
+      -2px -2px 0 #6a6255 inset,
+      5px 5px 0 #666055;
+  }
+  .terminal-window .window-title {
+    height: 22px;
+    background: repeating-linear-gradient(
+      90deg,
+      #938b7d 0px,
+      #938b7d 1px,
+      #d4ccb8 1px,
+      #d4ccb8 4px
+    );
+    border-bottom: 2px solid #4f493f;
+  }
+  .terminal-window .window-title h2 {
+    background: #d4ccb8;
+    color: #17140f;
+    font-family: 'VT323', var(--mono), monospace;
+    font-size: 19px;
+    font-weight: normal;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    padding: 0 12px;
+    text-shadow: none;
+  }
+  .terminal-window .wc {
+    width: 12px;
+    height: 12px;
+    background: #d4ccb8;
+    border: 2px solid #4f493f;
+    box-shadow: 1px 1px 0 #eee6d3 inset;
+  }
+  .terminal-window .rainbow-bar { display: none; }
+  .terminal-window .window-body {
+    padding: 16px;
+    background: #8f8677;
+    border-top: 1px solid #efe5cf;
+  }
+  .terminal-screen {
+    position: relative;
+    overflow: hidden;
+    min-height: 270px;
+    border: 10px solid #27231d;
+    outline: 2px solid #61594d;
+    background: #001a08;
+    color: #9fdf8a;
+    padding: 18px 20px 16px;
+    font-family: 'VT323', 'Courier New', monospace;
+    font-size: 23px;
+    line-height: 1.12;
+    letter-spacing: 0;
+    box-shadow:
+      0 0 0 3px #0a0a08 inset,
+      0 0 28px rgba(0,0,0,0.9) inset;
+    text-shadow: 1px 1px 0 #002b0d;
+  }
+  .terminal-screen::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(159,223,138,0.08) 0px,
+      rgba(159,223,138,0.08) 1px,
+      rgba(0,0,0,0.08) 1px,
+      rgba(0,0,0,0.08) 3px
+    );
+    opacity: 0.55;
+  }
+  .terminal-screen::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at center, transparent 48%, rgba(0,0,0,0.38) 100%);
+  }
+  .terminal-content {
+    position: relative;
+    z-index: 1;
+  }
+  .terminal-line {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .terminal-line.prompt {
+    color: #b7f5a5;
+    margin-bottom: 8px;
+  }
+  .terminal-line.ascii {
+    color: #8fcf7a;
+    display: block;
+    white-space: pre;
+    line-height: 0.95;
+    margin-bottom: 2px;
+  }
+  .terminal-line.notice {
+    color: #7fbf6f;
+    display: block;
+    margin: 8px 0 10px;
+  }
+  .terminal-key {
+    color: #b7f5a5;
+    min-width: 118px;
+  }
+  .terminal-value,
+  .terminal-status {
+    color: #9fdf8a;
+  }
+  .terminal-status::before {
+    content: "[READY] ";
+    color: #b7f5a5;
+  }
+  .terminal-cursor {
+    display: inline-block;
+    width: 12px;
+    height: 20px;
+    background: #9fdf8a;
+    box-shadow: none;
+    transform: translateY(3px);
+    animation: blink 1s step-end infinite;
+  }
+  @media (max-width: 580px) {
+    .terminal-window .window-body { padding: 12px; }
+    .terminal-screen { font-size: 19px; padding: 14px; border-width: 8px; }
+    .terminal-key { min-width: 94px; }
+    .terminal-line.ascii { font-size: 17px; }
+  }
+
+
   /* ── FOOTER ── */
   .footer-bar {
     max-width: 780px;
@@ -429,40 +568,31 @@
 
   <!-- QUICK FACTS full width -->
   <div class="two-col single">
-    <!-- ABOUT / QUICK FACTS -->
-    <div class="window">
+    <!-- ABOUT / QUICK FACTS TERMINAL -->
+    <div class="window terminal-window">
       <div class="window-title">
         <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
-        <h2>📋 Quick Facts</h2>
+        <h2>QUICKFACT.SYS</h2>
       </div>
       <div class="rainbow-bar">
         <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
         <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
       </div>
       <div class="window-body">
-        <div class="fact-row">
-          <span class="fact-label">DEGREE</span>
-          <span class="fact-value">B.S. Computer Science</span>
-        </div>
-        <div class="fact-row">
-          <span class="fact-label">LOCATION</span>
-          <span class="fact-value">Pennsylvania, USA</span>
-        </div>
-        <div class="fact-row">
-          <span class="fact-label">INTERESTS</span>
-          <span class="fact-value">Japan 🇯🇵 · Motorcycles 🏍️ · Semiconductors · AI</span>
-        </div>
-        <div class="fact-row">
-          <span class="fact-label">HARDWARE</span>
-          <span class="fact-value">RTX 3090 · 98GB RAM · Local AI Setup</span>
-        </div>
-        <div class="fact-row">
-          <span class="fact-label">TARGET</span>
-          <span class="fact-value">EE / Semiconductor Industry · Japan Engineer Visa</span>
-        </div>
-        <div class="fact-row">
-          <span class="fact-label">STATUS</span>
-          <span class="fact-value" style="color: var(--rainbow-green); font-family: var(--mono); font-size:12px;">● Open to opportunities</span>
+        <div class="terminal-screen" aria-label="Quick facts shown as a classic monochrome CRT terminal">
+          <div class="terminal-content">
+            <div class="terminal-line ascii">D U C   P O R T F O L I O   T E R M I N A L</div>
+            <div class="terminal-line ascii">---------------------------------------------</div>
+            <div class="terminal-line notice">MONOCHROME DISPLAY ADAPTER // SYSTEM READY</div>
+            <div class="terminal-line prompt">C:\DUC&gt;TYPE QUICKFCT.TXT</div>
+            <div class="terminal-line"><span class="terminal-key">DEGREE....</span><span class="terminal-value">B.S. COMPUTER SCIENCE</span></div>
+            <div class="terminal-line"><span class="terminal-key">LOCATION..</span><span class="terminal-value">PENNSYLVANIA, USA</span></div>
+            <div class="terminal-line"><span class="terminal-key">INTEREST..</span><span class="terminal-value">JAPAN / MOTORCYCLES / SEMICONDUCTORS / AI</span></div>
+            <div class="terminal-line"><span class="terminal-key">HARDWARE..</span><span class="terminal-value">RTX 3090 / 98GB RAM / LOCAL AI SETUP</span></div>
+            <div class="terminal-line"><span class="terminal-key">TARGET....</span><span class="terminal-value">EE + SEMICONDUCTOR INDUSTRY / JAPAN ENGINEER VISA</span></div>
+            <div class="terminal-line"><span class="terminal-key">STATUS....</span><span class="terminal-status">OPEN TO OPPORTUNITIES</span></div>
+            <div class="terminal-line prompt">C:\DUC&gt;<span class="terminal-cursor"></span></div>
+          </div>
         </div>
       </div>
     </div>
