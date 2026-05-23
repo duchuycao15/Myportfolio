@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Basic document settings for language, character encoding, responsive layout, and page title. -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Duc — Portfolio</title>
+
+<!-- Google Fonts used to create the retro Macintosh / terminal style. -->
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
 <style>
+  /* Global design tokens: colors, shadows, and font families used across the full page. */
   :root {
     --mac-beige: #C8C0B0;
     --mac-beige-dark: #AEA89E;
@@ -27,8 +32,10 @@
     --sans: 'IBM Plex Sans', sans-serif;
   }
 
+  /* Reset default browser spacing so the layout is easier to control. */
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
+  /* Main page background with a subtle old-computer texture. */
   body {
     background-color: var(--mac-beige);
     background-image:
@@ -44,7 +51,8 @@
     overflow-x: hidden;
   }
 
-  /* ── MENU BAR ── */
+  /* ── MENU BAR ──
+     Fixed top navigation bar styled like an old Macintosh system menu. */
   .menubar {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -58,6 +66,7 @@
     font-size: 16px;
     box-shadow: 0 1px 0 var(--mac-highlight) inset;
   }
+  /* Rainbow Apple-style icon area on the far left of the menu bar. */
   .menubar-apple {
     padding: 0 14px;
     font-size: 18px;
@@ -67,6 +76,7 @@
     cursor: default;
     border-right: 1px solid var(--mac-shadow);
   }
+  /* Individual colored stripes that build the retro rainbow icon. */
   .apple-stripe { display: inline-block; width: 12px; height: 3px; }
   .apple-stripe:nth-child(1) { background: var(--rainbow-red); }
   .apple-stripe:nth-child(2) { background: var(--rainbow-orange); }
@@ -74,6 +84,7 @@
   .apple-stripe:nth-child(4) { background: var(--rainbow-green); }
   .apple-stripe:nth-child(5) { background: var(--rainbow-blue); }
   .apple-stripe:nth-child(6) { background: var(--rainbow-purple); }
+  /* Menu bar text items such as File, View, and Special. */
   .menubar-item {
     padding: 0 12px;
     height: 22px;
@@ -83,6 +94,7 @@
     color: var(--sys-black);
   }
   .menubar-item:hover { background: var(--sys-black); color: white; }
+  /* Clock area aligned to the right side of the menu bar. */
   .menubar-right {
     margin-left: auto;
     padding: 0 12px;
@@ -91,14 +103,16 @@
     color: var(--sys-gray);
   }
 
-  /* ── DESKTOP AREA ── */
+  /* ── DESKTOP AREA ──
+     Main page container below the fixed menu bar. */
   .desktop {
     margin-top: 22px;
     padding: 24px;
     min-height: calc(100vh - 22px);
   }
 
-  /* ── WINDOW CHROME ── */
+  /* ── WINDOW CHROME ──
+     Shared retro window styling used by every content section. */
   .window {
     background: var(--mac-cream);
     border: 1px solid var(--sys-border);
@@ -108,6 +122,7 @@
       3px 3px 0 var(--mac-shadow);
     margin-bottom: 24px;
   }
+  /* Title bar at the top of each retro window. */
   .window-title {
     height: 20px;
     background: repeating-linear-gradient(
@@ -131,6 +146,7 @@
     padding: 0 10px;
     letter-spacing: 0.5px;
   }
+  /* Small square controls on the left side of each window title bar. */
   .window-controls {
     position: absolute;
     left: 6px;
@@ -140,7 +156,8 @@
   .wc { width: 13px; height: 13px; border: 1px solid var(--sys-border); background: var(--mac-beige); }
   .window-body { padding: 16px; }
 
-  /* ── HERO WINDOW ── */
+  /* ── HERO WINDOW ──
+     Intro/about section with avatar, name, title, short bio, and skill tags. */
   .hero-window { max-width: 780px; margin: 0 auto 24px; }
   .hero-content {
     display: flex;
@@ -148,6 +165,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
   }
+  /* Avatar block prevents the profile icon from shrinking on smaller screens. */
   .avatar-area { flex-shrink: 0; }
   .avatar-frame {
     width: 160px;
@@ -166,6 +184,7 @@
     line-height: 1;
     user-select: none;
   }
+  /* Decorative rainbow divider used under selected window title bars. */
   .rainbow-bar {
     display: flex;
     height: 5px;
@@ -179,6 +198,7 @@
   .rb-5 { background: var(--rainbow-blue); }
   .rb-6 { background: var(--rainbow-purple); }
 
+  /* Text area next to the avatar in the hero section. */
   .hero-text { flex: 1; min-width: 200px; }
   .hero-name {
     font-family: var(--chicago);
@@ -202,6 +222,7 @@
     color: var(--sys-black);
     max-width: 420px;
   }
+  /* Blinking cursor effect for old-terminal styling. */
   .cursor {
     display: inline-block;
     width: 10px;
@@ -212,7 +233,8 @@
   }
   @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
 
-  /* ── SKILL TAGS ── */
+  /* ── SKILL TAGS ──
+     Small labeled badges showing technologies and career interests. */
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
   .tag {
     font-family: var(--mono);
@@ -229,12 +251,15 @@
   .tag.blue { border-color: var(--rainbow-blue); color: var(--rainbow-blue); background: #F0F0FF; }
   .tag.purple { border-color: var(--rainbow-purple); color: var(--rainbow-purple); background: #F5F0FF; }
 
-  /* ── TWO-COL LAYOUT ── */
+  /* ── TWO-COLUMN LAYOUT ──
+     Reusable grid layout for side-by-side window sections. */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 780px; margin: 0 auto 24px; }
   .two-col.single { grid-template-columns: 1fr; }
+  /* Stack the two-column layout into one column on smaller screens. */
   @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
 
-  /* ── PROJECT CARDS ── */
+  /* ── PROJECT CARDS ──
+     Portfolio project list with icon, description, and technology stack. */
   .projects-window { max-width: 780px; margin: 0 auto 24px; }
   .project-list { display: flex; flex-direction: column; gap: 12px; }
   .project-card {
@@ -246,6 +271,7 @@
     gap: 12px;
     align-items: flex-start;
   }
+  /* Square icon box for each project card. */
   .project-icon {
     width: 40px;
     height: 40px;
@@ -276,7 +302,8 @@
     color: var(--rainbow-blue);
   }
 
-  /* ── EXPERIENCE ── */
+  /* ── EXPERIENCE ──
+     Reusable item styling for work experience, education, and goals. */
   .exp-item {
     border-bottom: 1px dashed var(--mac-beige-dark);
     padding-bottom: 12px;
@@ -306,9 +333,11 @@
     line-height: 1.6;
   }
 
-  /* ── CONTACT ── */
+  /* ── CONTACT ──
+     Contact button grid for email, GitHub, LinkedIn, and resume links. */
   .contact-window { max-width: 780px; margin: 0 auto 24px; }
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* Stack contact buttons vertically on narrow mobile screens. */
   @media (max-width: 480px) { .contact-grid { grid-template-columns: 1fr; } }
   .contact-btn {
     font-family: var(--chicago);
@@ -332,7 +361,8 @@
   }
   .contact-icon { font-size: 20px; }
 
-  /* ── ABOUT FACTS ── */
+  /* ── ABOUT FACTS ──
+     Older quick-fact row styling kept for reusable profile information rows. */
   .fact-row {
     display: flex;
     gap: 12px;
@@ -352,146 +382,131 @@
   }
   .fact-value { color: var(--sys-black); line-height: 1.5; }
 
-  /* ── QUICK FACTS: CLASSIC CRT TERMINAL ── */
+  /* ══════════════════════════════════════════
+     QUICKFACT.SYS — FULL RETRO CRT TERMINAL
+     This section turns the quick facts area into a green monochrome CRT terminal.
+     ══════════════════════════════════════════ */
+  /* Outer retro window wrapper for the terminal section. */
   .terminal-window {
-    background: #b9b1a1;
-    border: 3px solid #4f493f;
+    background: var(--mac-cream);
+    border: 1px solid var(--sys-border);
     box-shadow:
-      2px 2px 0 #eee6d3 inset,
-      -2px -2px 0 #6a6255 inset,
-      5px 5px 0 #666055;
+      1px 1px 0 var(--mac-highlight) inset,
+      -1px -1px 0 var(--mac-shadow) inset,
+      3px 3px 0 var(--mac-shadow);
   }
   .terminal-window .window-title {
-    height: 22px;
+    height: 20px;
     background: repeating-linear-gradient(
       90deg,
-      #938b7d 0px,
-      #938b7d 1px,
-      #d4ccb8 1px,
-      #d4ccb8 4px
+      var(--mac-beige-dark) 0px,
+      var(--mac-beige-dark) 1px,
+      var(--mac-beige-light) 1px,
+      var(--mac-beige-light) 3px
     );
-    border-bottom: 2px solid #4f493f;
+    border-bottom: 1px solid var(--sys-border);
   }
   .terminal-window .window-title h2 {
-    background: #d4ccb8;
-    color: #17140f;
-    font-family: 'VT323', var(--mono), monospace;
-    font-size: 19px;
+    background: var(--mac-beige-light);
+    color: var(--sys-black);
+    font-family: var(--chicago);
+    font-size: 15px;
     font-weight: normal;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    padding: 0 12px;
-    text-shadow: none;
+    letter-spacing: 2px;
   }
   .terminal-window .wc {
-    width: 12px;
-    height: 12px;
-    background: #d4ccb8;
-    border: 2px solid #4f493f;
-    box-shadow: 1px 1px 0 #eee6d3 inset;
+    background: var(--mac-beige);
+    border-color: var(--sys-border);
   }
-  .terminal-window .rainbow-bar { display: none; }
   .terminal-window .window-body {
-    padding: 16px;
-    background: #8f8677;
-    border-top: 1px solid #efe5cf;
+    padding: 12px;
+    background: var(--mac-cream);
   }
+
+  /* The actual phosphor screen: green text, black background, and terminal spacing. */
   .terminal-screen {
+    background: #010e01;
+    color: #33ff33;
+    padding: 16px 20px 18px;
+    font-family: 'VT323', 'Courier New', monospace;
+    font-size: 21px;
+    line-height: 1.18;
+    letter-spacing: 0.4px;
+    border: 2px solid #000;
+    outline: 1px solid #0a1f0a;
     position: relative;
     overflow: hidden;
-    min-height: 270px;
-    border: 10px solid #27231d;
-    outline: 2px solid #61594d;
-    background: #001a08;
-    color: #9fdf8a;
-    padding: 18px 20px 16px;
-    font-family: 'VT323', 'Courier New', monospace;
-    font-size: 23px;
-    line-height: 1.12;
-    letter-spacing: 0;
-    box-shadow:
-      0 0 0 3px #0a0a08 inset,
-      0 0 28px rgba(0,0,0,0.9) inset;
-    text-shadow: 1px 1px 0 #002b0d;
+    /* subtle phosphor glow on text */
+    text-shadow: 0 0 5px rgba(51,255,51,0.4);
   }
+
+  /* Heavy scanlines create the old CRT monitor effect. */
   .terminal-screen::before {
     content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+    position: absolute; inset: 0; pointer-events: none;
     background: repeating-linear-gradient(
       0deg,
-      rgba(159,223,138,0.08) 0px,
-      rgba(159,223,138,0.08) 1px,
-      rgba(0,0,0,0.08) 1px,
-      rgba(0,0,0,0.08) 3px
+      rgba(0,0,0,0.50) 0px,
+      rgba(0,0,0,0.50) 1px,
+      transparent 1px,
+      transparent 3px
     );
-    opacity: 0.55;
+    z-index: 2;
   }
+  /* CRT vignette darkens the edges of the terminal screen. */
   .terminal-screen::after {
     content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(circle at center, transparent 48%, rgba(0,0,0,0.38) 100%);
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.70) 100%);
+    z-index: 3;
   }
-  .terminal-content {
-    position: relative;
-    z-index: 1;
+
+  /* Keeps terminal text above the scanline and vignette overlays. */
+  .tc { position: relative; z-index: 4; }
+
+  /* ASCII box header styling for the top of the terminal content. */
+  .t-box   { display: block; color: #1a8a1a; white-space: pre; font-size: 20px; line-height: 1.1; }
+  .t-title { display: block; color: #55ff55; white-space: pre; font-size: 20px; line-height: 1.1; text-shadow: 0 0 8px rgba(85,255,85,0.6); }
+
+  .t-line  { display: block; margin-bottom: 1px; }
+  .t-blank { display: block; height: 0.6em; }
+  .t-dim   { color: #0d660d; }
+  .t-prompt{ color: #55ff55; }
+
+  /* Terminal data rows for degree, location, interests, and goals. */
+  .t-row { display: flex; margin-bottom: 3px; font-size: 20px; }
+  .t-key { color: #22bb22; min-width: 120px; flex-shrink: 0; }
+  .t-sep { color: #0a550a; margin: 0 6px; }
+  .t-val      { color: #33ff33; }
+  .t-val.hi   { color: #88ff88; text-shadow: 0 0 7px rgba(136,255,136,0.5); }
+  .t-val.lo   { color: #1a991a; }
+  .t-val.acc  { color: #66ff66; }
+
+  /* Divider line inside the terminal output. */
+  .t-div { display: block; color: #0a440a; font-size: 20px; margin: 6px 0 5px; }
+
+  /* Status row showing availability and blinking terminal cursor. */
+  .t-status { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+  .t-badge {
+    font-size: 17px; color: #00ff00;
+    border: 1px solid #008800;
+    padding: 0 5px;
+    background: #001800;
+    text-shadow: 0 0 6px rgba(0,255,0,0.7);
+    animation: blink 1.3s step-end infinite;
   }
-  .terminal-line {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 4px;
-  }
-  .terminal-line.prompt {
-    color: #b7f5a5;
-    margin-bottom: 8px;
-  }
-  .terminal-line.ascii {
-    color: #8fcf7a;
-    display: block;
-    white-space: pre;
-    line-height: 0.95;
-    margin-bottom: 2px;
-  }
-  .terminal-line.notice {
-    color: #7fbf6f;
-    display: block;
-    margin: 8px 0 10px;
-  }
-  .terminal-key {
-    color: #b7f5a5;
-    min-width: 118px;
-  }
-  .terminal-value,
-  .terminal-status {
-    color: #9fdf8a;
-  }
-  .terminal-status::before {
-    content: "[READY] ";
-    color: #b7f5a5;
-  }
-  .terminal-cursor {
-    display: inline-block;
-    width: 12px;
-    height: 20px;
-    background: #9fdf8a;
-    box-shadow: none;
-    transform: translateY(3px);
+  .t-stxt { color: #33cc33; font-size: 19px; }
+  .tcursor {
+    display: inline-block; width: 10px; height: 18px;
+    background: #33ff33;
+    text-shadow: none;
+    box-shadow: 0 0 5px rgba(51,255,51,0.6);
+    transform: translateY(2px);
     animation: blink 1s step-end infinite;
   }
-  @media (max-width: 580px) {
-    .terminal-window .window-body { padding: 12px; }
-    .terminal-screen { font-size: 19px; padding: 14px; border-width: 8px; }
-    .terminal-key { min-width: 94px; }
-    .terminal-line.ascii { font-size: 17px; }
-  }
 
-
-  /* ── FOOTER ── */
+  /* ── FOOTER ──
+     Bottom information bar with copyright and retro system details. */
   .footer-bar {
     max-width: 780px;
     margin: 0 auto;
@@ -504,14 +519,17 @@
     color: var(--sys-gray);
   }
 
-  /* ── SCROLL REVEAL ── */
+  /* ── SCROLL REVEAL ──
+     Windows fade and slide into view when they enter the viewport. */
   .window { opacity: 0; transform: translateY(12px); transition: opacity 0.4s ease, transform 0.4s ease; }
   .window.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- MENU BAR -->
+<!-- MAIN MENU BAR
+     Fixed top menu with retro Apple-style stripes, menu labels, and live clock. -->
+
 <div class="menubar">
   <div class="menubar-apple">
     <span class="apple-stripe"></span>
@@ -528,32 +546,33 @@
   <div class="menubar-right" id="clock">--:-- --</div>
 </div>
 
-<!-- DESKTOP -->
+<!-- DESKTOP
+     Main wrapper for all portfolio windows below the menu bar. -->
 <div class="desktop">
 
-  <!-- HERO WINDOW -->
+  <!-- HERO / ABOUT ME WINDOW
+       Introduces the portfolio owner with avatar, title, short bio, and skill tags. -->
   <div class="window hero-window">
     <div class="window-title">
       <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
       <h2>👤 About Me</h2>
     </div>
-    <div class="rainbow-bar">
-      <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
-      <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
-    </div>
     <div class="window-body">
       <div class="hero-content">
+        <!-- Profile avatar area. -->
         <div class="avatar-area">
           <div class="avatar-frame">
             <div class="avatar-pixel">🧑‍💻</div>
           </div>
         </div>
+        <!-- Main hero text content. -->
         <div class="hero-text">
           <div class="hero-name">Duc</div>
           <div class="hero-title">Software Engineer · Pennsylvania, USA</div>
           <div class="hero-bio">
-            CS graduate building things at the intersection of software and hardware. Passionate about embedded systems, AI, and the semiconductor industry. Currently exploring a path toward electrical engineering and Japan. <span class="cursor"></span>
+            CS graduate building things at the intersection of software and hardware. Passionate about embedded systems, AI, and the semiconductor industry. Currently exploring a path toward electrical engineering and Japan.
           </div>
+          <!-- Skill and interest tags. -->
           <div class="tags">
             <span class="tag blue">Full-Stack Dev</span>
             <span class="tag green">Embedded Systems</span>
@@ -566,40 +585,44 @@
     </div>
   </div>
 
-  <!-- QUICK FACTS full width -->
+  <!-- QUICKFACT TERMINAL
+       Retro CRT-style section showing quick personal and career facts. -->
   <div class="two-col single">
-    <!-- ABOUT / QUICK FACTS TERMINAL -->
     <div class="window terminal-window">
       <div class="window-title">
         <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
         <h2>QUICKFACT.SYS</h2>
       </div>
-      <div class="rainbow-bar">
-        <div class="rb rb-1"></div><div class="rb rb-2"></div><div class="rb rb-3"></div>
-        <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
-      </div>
       <div class="window-body">
-        <div class="terminal-screen" aria-label="Quick facts shown as a classic monochrome CRT terminal">
-          <div class="terminal-content">
-            <div class="terminal-line ascii">D U C   P O R T F O L I O   T E R M I N A L</div>
-            <div class="terminal-line ascii">---------------------------------------------</div>
-            <div class="terminal-line notice">MONOCHROME DISPLAY ADAPTER // SYSTEM READY</div>
-            <div class="terminal-line prompt">C:\DUC&gt;TYPE QUICKFCT.TXT</div>
-            <div class="terminal-line"><span class="terminal-key">DEGREE....</span><span class="terminal-value">B.S. COMPUTER SCIENCE</span></div>
-            <div class="terminal-line"><span class="terminal-key">LOCATION..</span><span class="terminal-value">PENNSYLVANIA, USA</span></div>
-            <div class="terminal-line"><span class="terminal-key">INTEREST..</span><span class="terminal-value">JAPAN / MOTORCYCLES / SEMICONDUCTORS / AI</span></div>
-            <div class="terminal-line"><span class="terminal-key">HARDWARE..</span><span class="terminal-value"></span></div>
-            <div class="terminal-line"><span class="terminal-key">TARGET....</span><span class="terminal-value">EE + SEMICONDUCTOR INDUSTRY / JAPAN ENGINEER VISA</span></div>
-            <div class="terminal-line"><span class="terminal-key">STATUS....</span><span class="terminal-status">OPEN TO OPPORTUNITIES</span></div>
-            <div class="terminal-line prompt">C:\DUC&gt;<span class="terminal-cursor"></span></div>
+        <!-- Terminal screen content with ASCII header, command prompt, and status row. -->
+        <div class="terminal-screen" aria-label="Quick facts as a retro CRT terminal">
+          <div class="tc">
+<span class="t-box">+--------------------------------------------------+</span>
+<span class="t-title">|      DUC PORTFOLIO TERMINAL  v2.6  [80 COL]      |</span>
+<span class="t-box">+--------------------------------------------------+</span>
+<span class="t-line t-dim">  MONOCHROME DISPLAY ADAPTER  //  9600 BAUD  //  READY</span>
+<span class="t-blank"></span>
+<span class="t-line t-prompt">C:\DUC&gt; TYPE QUICKFCT.TXT</span>
+<span class="t-blank"></span>
+<div class="t-row"><span class="t-key">DEGREE  </span><span class="t-sep">::</span><span class="t-val hi">B.S. COMPUTER SCIENCE</span></div>
+<div class="t-row"><span class="t-key">LOCATION</span><span class="t-sep">::</span><span class="t-val">PENNSYLVANIA, USA</span></div>
+<div class="t-row"><span class="t-key">INTEREST</span><span class="t-sep">::</span><span class="t-val acc">JAPAN / MOTORCYCLES / SEMICONDUCTORS / AI</span></div>
+<div class="t-row"><span class="t-key">TARGET  </span><span class="t-sep">::</span><span class="t-val">EE + SEMICONDUCTOR -- JAPAN ENGINEER VISA</span></div>
+<div class="t-row"><span class="t-key">LANGUAGE</span><span class="t-sep">::</span><span class="t-val lo">JLPT N2  (IN PROGRESS)</span></div>
+<span class="t-div">--------------------------------------------------</span>
+<div class="t-status">
+  <span class="t-badge">[OPEN]</span>
+  <span class="t-stxt">AVAILABLE FOR OPPORTUNITIES</span>
+  <span class="tcursor"></span>
+</div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS WINDOW
+       Displays highlighted projects with icon, description, and technology stack. -->
   <div class="window projects-window">
     <div class="window-title">
       <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
@@ -610,7 +633,9 @@
       <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
     </div>
     <div class="window-body">
+      <!-- List of project cards. -->
       <div class="project-list">
+        <!-- Project card: OpenClaw Office Dashboard. -->
         <div class="project-card">
           <div class="project-icon">🤖</div>
           <div>
@@ -619,14 +644,16 @@
             <div class="project-tech">HTML · CSS · JavaScript · Docker · WebSocket · Local LLM</div>
           </div>
         </div>
+        <!-- Project card: Local AI Homelab. -->
         <div class="project-card">
           <div class="project-icon">💻</div>
           <div>
             <div class="project-name">Local AI Homelab</div>
-            <div class="project-desc"></div>
+            <div class="project-desc">Self-hosted multi-agent AI infrastructure with custom orchestration, REST APIs, and Docker-based deployment on a high-performance local machine.</div>
             <div class="project-tech">Python · Docker · CUDA · REST API · Windows 11</div>
           </div>
         </div>
+        <!-- Project card: Semiconductor Career Research. -->
         <div class="project-card">
           <div class="project-icon">🔬</div>
           <div>
@@ -635,6 +662,7 @@
             <div class="project-tech">Research · Career Planning · Japan Engineer Visa · EE/CS overlap</div>
           </div>
         </div>
+        <!-- Project card: Future embedded systems and IoT projects. -->
         <div class="project-card">
           <div class="project-icon">🏍️</div>
           <div>
@@ -647,7 +675,8 @@
     </div>
   </div>
 
-  <!-- EXPERIENCE -->
+  <!-- EXPERIENCE AND EDUCATION SECTION
+       Two-column layout for work experience on the left and education/goals on the right. -->
   <div class="two-col">
     <div class="window">
       <div class="window-title">
@@ -659,18 +688,21 @@
         <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
       </div>
       <div class="window-body">
+        <!-- Experience item: current software / tech role. -->
         <div class="exp-item">
           <div class="exp-role">Software / Tech Role</div>
           <div class="exp-company">Tech Industry · Pennsylvania</div>
           <div class="exp-date">Current</div>
           <div class="exp-desc">Working on software engineering and tech projects while building expertise in AI systems and preparing for a semiconductor/EE industry transition.</div>
         </div>
+        <!-- Experience item: computer science degree background. -->
         <div class="exp-item">
           <div class="exp-role">CS Graduate</div>
           <div class="exp-company">Bachelor of Science — Computer Science</div>
           <div class="exp-date">Completed</div>
           <div class="exp-desc">Core foundation in algorithms, systems programming, and software engineering. Qualifies for Japan's Engineer Visa pathway.</div>
         </div>
+        <!-- Experience item: self-directed AI homelab work. -->
         <div class="exp-item">
           <div class="exp-role">AI Homelab Architect</div>
           <div class="exp-company">Self-Directed</div>
@@ -680,7 +712,6 @@
       </div>
     </div>
 
-    <!-- EDUCATION + INTERESTS -->
     <div class="window">
       <div class="window-title">
         <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
@@ -691,18 +722,21 @@
         <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
       </div>
       <div class="window-body">
+        <!-- Education goal: planned electrical engineering master's path. -->
         <div class="exp-item">
           <div class="exp-role">M.S. Electrical Engineering</div>
           <div class="exp-company">Target: WGU / UT Arlington / Lamar</div>
           <div class="exp-date">Planned — Online / In-state Texas</div>
           <div class="exp-desc">Pursuing EE master's to bridge CS background with semiconductor and embedded hardware industry requirements.</div>
         </div>
+        <!-- Language goal: Japanese JLPT N2 study progress. -->
         <div class="exp-item">
           <div class="exp-role">JLPT N2 Japanese</div>
           <div class="exp-company">Self-study</div>
           <div class="exp-date">In Progress</div>
           <div class="exp-desc">Working toward N2 proficiency as a key milestone for Japan's Engineer Visa and technical workplace integration.</div>
         </div>
+        <!-- Career goal: semiconductor companies and target industries. -->
         <div class="exp-item">
           <div class="exp-role">Target Companies</div>
           <div class="exp-company">TSMC Kumamoto · Rapidus · Renesas · Texas Instruments · NXP</div>
@@ -713,7 +747,8 @@
     </div>
   </div>
 
-  <!-- CONTACT -->
+  <!-- CONTACT WINDOW
+       Contains external links and buttons for contacting or viewing profiles. -->
   <div class="window contact-window">
     <div class="window-title">
       <div class="window-controls"><div class="wc"></div><div class="wc"></div></div>
@@ -724,6 +759,7 @@
       <div class="rb rb-4"></div><div class="rb rb-5"></div><div class="rb rb-6"></div>
     </div>
     <div class="window-body">
+      <!-- Contact button grid. Replace placeholder links with real portfolio links. -->
       <div class="contact-grid">
         <a class="contact-btn" href="mailto:your@email.com">
           <span class="contact-icon">✉️</span> Email Me
@@ -741,7 +777,8 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- FOOTER
+       Small bottom bar with copyright and retro system information. -->
   <div class="footer-bar">
     <span>© 2026 Duc — Made with ♥ and nostalgia</span>
     <span>System 7.5.3 · 640×480 · 256 Colors</span>
@@ -750,7 +787,7 @@
 </div>
 
 <script>
-  // Clock
+  // Updates the menu bar clock once every second.
   function updateClock() {
     const now = new Date();
     document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
@@ -758,7 +795,7 @@
   updateClock();
   setInterval(updateClock, 1000);
 
-  // Scroll reveal
+  // Reveals each window when it scrolls into view.
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -768,6 +805,7 @@
     });
   }, { threshold: 0.1 });
 
+  // Attach the scroll reveal observer to every retro window on the page.
   document.querySelectorAll('.window').forEach(w => observer.observe(w));
 </script>
 </body>
