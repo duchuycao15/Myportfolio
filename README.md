@@ -1,6 +1,4 @@
- /\_/\
-( o.o )
- > ^ <
+Link: https://duchuycao15.github.io/Myportfolio/
 
 🖥️ This is a website I created for my portfolio to demonstrate my skills in front‑end web development.
 🎨 The design is inspired by the classic look of old Macintosh computers, using a retro style interface to create a unique and nostalgic user experience.
