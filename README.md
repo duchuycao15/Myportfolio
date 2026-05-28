@@ -1,3 +1,7 @@
+ /\_/\
+( o.o )
+ > ^ <
+
 🖥️ This is a website I created for my portfolio to demonstrate my skills in front‑end web development.
 🎨 The design is inspired by the classic look of old Macintosh computers, using a retro style interface to create a unique and nostalgic user experience.
 🌈 I wanted the website to feel different from a typical modern portfolio, so I focused on combining creativity, visual design, and interactive elements to show both my technical ability and personal style.
