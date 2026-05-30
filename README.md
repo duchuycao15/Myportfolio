@@ -14,3 +14,8 @@ Link: https://duchuycao15.github.io/Myportfolio/
 
 ✨ Overall, this project represents my growth as a developer and my interest in creating websites that are both functional and visually memorable.
 🛠️ It allowed me to practice my coding skills while also designing an experience that feels personal, creative, and inspired by the technology I enjoy.
+
+
+Update:
+ 1. Adjust the exprence.
+ 2. Adjust only the conentet not the layout.
