@@ -20,4 +20,7 @@ Update:
  1. Adjust the exprence.
  2. Adjust only the conentet not the layout.
  3. Chỉnh cho hay hơn
- 4. 
+ 4. Chỉnh lại text
+ 5. Làm cho mọi dự án hay hơn
+ 6. 
+ 7. 
